@@ -137,7 +137,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
+/******/ 	__webpack_require__.p = "/field-jakarta/";
 /******/
 /******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
 /******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
@@ -505,7 +505,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var regi
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.runtime.esm.js\");\n/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ \"./node_modules/vue-router/dist/vue-router.esm.js\");\n/* harmony import */ var _views_Login_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/Login.vue */ \"./src/views/Login.vue\");\n/* harmony import */ var _views_Controls_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/Controls.vue */ \"./src/views/Controls.vue\");\n\n\n\n\nvue__WEBPACK_IMPORTED_MODULE_0__[\"default\"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);\nvar routes = [{\n  path: '/',\n  redirect: {\n    name: 'login'\n  }\n}, {\n  path: '/login',\n  name: 'login',\n  component: _views_Login_vue__WEBPACK_IMPORTED_MODULE_2__[\"default\"]\n}, {\n  path: '/controls',\n  name: 'controls',\n  component: _views_Controls_vue__WEBPACK_IMPORTED_MODULE_3__[\"default\"]\n}];\nvar router = new vue_router__WEBPACK_IMPORTED_MODULE_1__[\"default\"]({\n  mode: 'history',\n  base: \"/\",\n  routes: routes\n});\n/* harmony default export */ __webpack_exports__[\"default\"] = (router);\n\n//# sourceURL=webpack:///./src/router/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.runtime.esm.js\");\n/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ \"./node_modules/vue-router/dist/vue-router.esm.js\");\n/* harmony import */ var _views_Login_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/Login.vue */ \"./src/views/Login.vue\");\n/* harmony import */ var _views_Controls_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../views/Controls.vue */ \"./src/views/Controls.vue\");\n\n\n\n\nvue__WEBPACK_IMPORTED_MODULE_0__[\"default\"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);\nvar routes = [{\n  path: '/',\n  redirect: {\n    name: 'login'\n  }\n}, {\n  path: '/login',\n  name: 'login',\n  component: _views_Login_vue__WEBPACK_IMPORTED_MODULE_2__[\"default\"]\n}, {\n  path: '/controls',\n  name: 'controls',\n  component: _views_Controls_vue__WEBPACK_IMPORTED_MODULE_3__[\"default\"]\n}];\nvar router = new vue_router__WEBPACK_IMPORTED_MODULE_1__[\"default\"]({\n  mode: 'history',\n  base: \"/field-jakarta/\",\n  routes: routes\n});\n/* harmony default export */ __webpack_exports__[\"default\"] = (router);\n\n//# sourceURL=webpack:///./src/router/index.js?");
 
 /***/ }),
 
