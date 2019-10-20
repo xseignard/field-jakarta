@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     async fetchSequences() {
-      const res = await fetch('http://localhost:3000/api/sequences')
+      const res = await fetch(`${process.env.VUE_APP_SERVER_URL}/api/sequences`)
       this.sequences = await res.json()
     },
   },

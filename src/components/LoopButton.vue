@@ -11,7 +11,7 @@ export default {
   methods: {
     async click() {
       console.log(`loop active: ${this.active}`)
-      await fetch(`http://localhost:3000/api/loop/${this.active ? 1 : 0}`)
+      await fetch(`${process.env.VUE_APP_SERVER_URL}/api/loop/${this.active ? 1 : 0}`)
     },
   },
 }

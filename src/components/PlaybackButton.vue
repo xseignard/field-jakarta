@@ -19,7 +19,7 @@ export default {
   methods: {
     async click() {
       console.log(this.action)
-      await fetch(`http://localhost:3000/api/${this.action}`)
+      await fetch(`${process.env.VUE_APP_SERVER_URL}/api/${this.action}`)
     },
   },
 }

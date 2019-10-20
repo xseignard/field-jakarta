@@ -32,3 +32,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - dotenvs
 - IP of the server on the network
 - put WAIT const in .env
+- reactivate login

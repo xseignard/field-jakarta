@@ -11,7 +11,7 @@ export default {
   methods: {
     async click() {
       console.log(`sequence ${this.id}`)
-      await fetch(`http://localhost:3000/api/sequence/${this.id}`)
+      await fetch(`${process.env.VUE_APP_SERVER_URL}/api/sequence/${this.id}`)
     },
   },
 }
