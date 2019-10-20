@@ -5,6 +5,7 @@
         <v-row justify="space-around">
           <PlaybackButton action="play" />
           <PlaybackButton action="stop" />
+          <LoopButton />
         </v-row>
       </v-card-text>
     </v-card>
@@ -30,24 +31,28 @@
 
 <script>
 import PlaybackButton from '../components/PlaybackButton'
+import LoopButton from '../components/LoopButton'
 import SequenceButton from '../components/SequenceButton'
 
 export default {
   name: 'Controls',
   components: {
     PlaybackButton,
+    LoopButton,
     SequenceButton,
   },
   data: () => ({
-    sequences: [
-      { name: 'Breathe', id: 1 },
-      { name: 'Boom', id: 2 },
-      { name: 'Stuff', id: 3 },
-      { name: 'Other', id: 4 },
-      { name: 'Again', id: 5 },
-      { name: 'Debug', id: 6 },
-    ],
+    sequences: [],
   }),
+  created() {
+    this.fetchSequences()
+  },
+  methods: {
+    async fetchSequences() {
+      const res = await fetch('http://localhost:3000/api/sequences')
+      this.sequences = await res.json()
+    },
+  },
 }
 </script>
 

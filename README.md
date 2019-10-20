@@ -22,3 +22,13 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+## TODOs
+
+- setup server start timeout
+- check what's the default mode when install starts
+- right password
+- dotenvs
+- IP of the server on the network
+- put WAIT const in .env

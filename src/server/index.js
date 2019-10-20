@@ -20,7 +20,7 @@ const start = async () => {
   app.use('/api', router.api)
   // start the whole thing
   app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}!`)
+    console.log(`Wok Hei server listening on port ${PORT}!`)
   })
 
   // cleanup handler
@@ -41,4 +41,10 @@ const start = async () => {
   })
 }
 
-start()
+// Wait for some time before starting the server
+// So we are sure Vezér have sarted
+const WAIT = 0 // seconds
+console.log(`Waiting ${WAIT} secs for the timeline editor to start...`)
+setTimeout(() => {
+  start()
+}, WAIT * 1000)
