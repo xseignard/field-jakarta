@@ -1,6 +1,6 @@
+require('dotenv-flow').config()
 const express = require('express')
 const cors = require('cors')
-
 const Router = require('./router')
 
 const app = express()
@@ -43,8 +43,9 @@ const start = async () => {
 
 // Wait for some time before starting the server
 // So we are sure Vezér have sarted
-const WAIT = 0 // seconds
-console.log(`Waiting ${WAIT} secs for the timeline editor to start...`)
+console.log(
+  `Waiting ${process.env.SERVER_START_TIMEOUT} secs for the timeline editor (Vezér) to start...`
+)
 setTimeout(() => {
   start()
-}, WAIT * 1000)
+}, process.env.SERVER_START_TIMEOUT * 1000)
