@@ -5,10 +5,10 @@ class OSC {
   constructor() {
     this.client = new osc.Client('localhost', 1234)
     // start vezér with some default values
-    // TODO: start playing directly ?
-    this.stop()
-    this.loop(true)
-    this.soloMode(true)
+    // e.g. playing all comps in loop
+    this.play(1)
+    this.loop(1)
+    this.soloMode(1)
     this.client.send('/vezer/selectcompatindex/', 1)
   }
 
@@ -30,66 +30,95 @@ class OSC {
 
   /**
    * Trigger global play. Always rewind before playing
+   * @param {Number} loop - 1 if loop mode enabled, 0 otherwise
    */
-  play() {
-    this.sendMessages([
+  play(loop) {
+    let messages = [
+      // rewind all comps
       { route: 'rewindall', value: 0 },
+      // stop global play
       { route: 'playall', value: 0 },
-      { route: 'playall', value: 1 },
-    ])
+      // turn on global queue
+      { route: 'queuedmode', value: 1 },
+      // turn on/off global loop
+      { route: 'queuedloop', value: loop },
+    ]
+    this.sendMessages(messages, () => {
+      this.sendMessages([
+        // select first comp
+        { route: 'selectcompatindex', value: 1 },
+        // start global play
+        { route: 'playall', value: 1 },
+      ])
+    })
   }
 
   /**
    * Global stop. It means the following:
    * - blackout
    * - stop the global play
-   * - stop individual comps (if any, shouldn't)
+   * - stop individual comps (if any playing)
    * - rewind all comps for a next start
    */
   stop() {
     this.sendMessages([
+      // turn off all (e.g send art-net value 0 to all)
       { route: 'blackout', value: 0 },
+      // stop global play
       { route: 'playall', value: 0 },
+      // stop running comps
       { route: 'stopcomps', value: 0 },
+      // rewind all comps
       { route: 'rewindall', value: 0 },
     ])
   }
 
   /**
+   * Triggers a given sequence
+   * @param {Number} id - id of the sequence (starting at 1)
+   * @param {Number} loop - 1 if loop mode enabled, 0 otherwise
+   */
+  sequence(id, loop) {
+    let messages = [
+      // stop global play
+      { route: 'playall', value: 0 },
+      // stop running comps
+      { route: 'stopcomps', value: 0 },
+      // rewind all comps
+      { route: 'rewindall', value: 0 },
+      // turn off global queue
+      { route: 'queuedmode', value: 0 },
+      // turn off global loop
+      { route: 'queuedloop', value: 0 },
+    ]
+    this.sendMessages(messages, () => {
+      // trigger selected comp
+      this.sendMessages([{ route: 'triggercompatindex', value: id }], () => {
+        // activate comp loop
+        this.sendMessages([{ route: 'current/loop', value: loop }])
+      })
+    })
+  }
+
+  /**
    * Turns on/off the loop
-   * @param {Boolean} active - whether the loop mode is active or not
+   * @param {Number} active - 1 if loop mode enabled, 0 otherwise
    */
   loop(active) {
     this.sendMessages([
-      { route: 'queuedmode', value: active ? 1 : 0 },
-      { route: 'queuedloop', value: active ? 1 : 0 },
+      // turn on/off global queue and global loop
+      { route: 'queuedmode', value: active },
+      { route: 'queuedloop', value: active },
     ])
   }
 
   /**
    * Turns on/off the solo mode
-   * @param {Boolean} active - whether the solo mode is active or not
+   * @param {Number} active - 1 if solo mode enabled, 0 otherwise
    */
   soloMode(active) {
-    this.sendMessages([{ route: 'solomode', value: active ? 1 : 0 }])
-  }
-
-  /**
-   * Triggers a given sequence
-   * @param {Number} id - id of the sequence (starting at 1)
-   */
-  sequence(id) {
-    this.sendMessages(
-      [
-        { route: 'blackout', value: 0 },
-        { route: 'playall', value: 0 },
-        { route: 'stopcomps', value: 0 },
-        { route: 'rewindall', value: 0 },
-      ],
-      () => {
-        this.client.send('/vezer/triggercompatindex/', id)
-      }
-    )
+    // solo mode enforces that only one comp is playing
+    this.sendMessages([{ route: 'solomode', value: active }])
   }
 }
 

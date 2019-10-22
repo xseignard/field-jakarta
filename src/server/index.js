@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3000
 const start = async () => {
   // front end serving
   if (process.env.NODE_ENV === 'production') {
+    console.log(process.cwd())
     app.use('/', express.static('./dist'))
   }
   // connect the http router
@@ -24,11 +25,16 @@ const start = async () => {
   })
 
   // cleanup handler
+  let cleaning = false
   const cleanup = () => {
-    console.log('do something here!!! (if needed)')
-    setTimeout(() => {
-      process.exit()
-    }, 10)
+    if (!cleaning) {
+      cleaning = true
+      console.log('Stopping Vezér...')
+      router.osc.stop()
+      setTimeout(() => {
+        process.exit()
+      }, 1000)
+    }
   }
   process.on('exit', cleanup)
   process.on('SIGINT', cleanup)

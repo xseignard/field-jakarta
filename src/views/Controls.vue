@@ -2,27 +2,27 @@
   <v-container>
     <v-card class="mx-auto">
       <v-card-text>
-        <v-row justify="space-around">
-          <PlaybackButton action="play" />
-          <PlaybackButton action="stop" />
-          <LoopButton />
-        </v-row>
-      </v-card-text>
-    </v-card>
-    <v-card class="mx-auto mt-4">
-      <v-card-text>
         <v-row justify="center">
           <h1 class="display-1 text--primary">Sequences</h1>
         </v-row>
         <v-row justify="center">
           <v-col>
+            <PlaybackButton action="play" />
             <SequenceButton
               v-for="s in sequences"
               :key="s.id"
               :name="s.name"
               :id="s.id"
             />
+            <PlaybackButton action="stop" />
           </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
+    <v-card class="mx-auto mt-4">
+      <v-card-text>
+        <v-row justify="space-around">
+          <LoopButton />
         </v-row>
       </v-card-text>
     </v-card>

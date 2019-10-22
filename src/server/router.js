@@ -14,27 +14,30 @@ class Router {
       res.status(200).json(sequences)
     })
 
-    this.api.get('/sequence/:id?', async (req, res) => {
-      console.log(`sequence ${req.params.id}`)
-      this.osc.sequence(parseInt(req.params.id, 10))
+    this.api.get('/sequence/:id/:loop', async (req, res) => {
+      const id = parseInt(req.params.id, 10)
+      const loop = parseInt(req.params.loop, 10)
+      console.log(`sequence: ${id}, loop: ${loop}`)
+      this.osc.sequence(id, loop)
       res.status(200).json()
     })
 
-    this.api.get('/play', async (req, res) => {
-      console.log('play')
-      this.osc.play()
+    this.api.get('/play/:loop', async (req, res) => {
+      const loop = parseInt(req.params.loop, 10)
+      console.log(`play, loop: ${loop}`)
+      this.osc.play(loop)
       res.status(200).json()
     })
 
-    this.api.get('/stop', async (req, res) => {
+    this.api.get('/stop/:loop?', async (req, res) => {
       console.log('stop')
       this.osc.stop()
       res.status(200).json()
     })
 
     this.api.get('/loop/:active?', async (req, res) => {
-      const active = parseInt(req.params.active, 10) === 1 ? true : false
-      console.log(`loop ${active}`)
+      const active = parseInt(req.params.active, 10)
+      console.log(`loop: ${active}`)
       this.osc.loop(active)
       res.status(200).json()
     })
