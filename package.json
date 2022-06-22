@@ -10,7 +10,7 @@
     "start:dev": "nodemon --inspect src/server"
   },
   "dependencies": {
-    "async": "^3.1.0",
+    "async": "^3.2.2",
     "core-js": "^3.1.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
